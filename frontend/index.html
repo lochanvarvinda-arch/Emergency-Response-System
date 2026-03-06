@@ -1,79 +1,115 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Emergency Response AI</title>
 
-  <link rel="stylesheet" href="style.css">
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-
 <body>
-
-<header>
-  <h1>🚑 Smart Emergency Response AI</h1>
-  <p>AI-powered emergency prioritization & response coordination</p>
-</header>
-
-<div class="dashboard">
-
-  <div class="sidebar">
-
-    <div class="card">
-      <h2>Report Emergency</h2>
-
-      <label>Type</label>
-      <select id="type">
-        <option value="Fire">Fire</option>
-        <option value="Accident">Accident</option>
-        <option value="Medical">Medical</option>
-      </select>
-
-      <label>Severity</label>
-      <select id="severity">
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-
-      <button onclick="reportEmergency()">🚨 Report Emergency</button>
-
+  <header class="topbar">
+    <div>
+      <h1>Smart Emergency Response AI</h1>
+      <p>AI-powered emergency prioritization and live incident tracking</p>
     </div>
+    <div class="status-pill">System Live</div>
+  </header>
 
-    <div class="card">
-      <h2>Active Emergencies</h2>
-
-      <div class="incident high">
-        🔥 Fire — Severity High
+  <main class="layout">
+    <section class="left-panel">
+      <div class="card hero-card" id="heroCard">
+        <div class="hero-head">
+          <span class="hero-label">Highest Priority Emergency</span>
+          <span class="hero-priority" id="heroPriority">--</span>
+        </div>
+        <h2 id="heroType">No active incidents</h2>
+        <p class="muted" id="heroDetails">Report an emergency to begin live monitoring.</p>
+        <div class="hero-meta">
+          <div>
+            <span class="meta-label">Severity</span>
+            <strong id="heroSeverity">--</strong>
+          </div>
+          <div>
+            <span class="meta-label">ETA</span>
+            <strong id="heroEta">--</strong>
+          </div>
+          <div>
+            <span class="meta-label">Status</span>
+            <strong id="heroStatus">--</strong>
+          </div>
+        </div>
       </div>
 
-      <div class="incident medium">
-        🚗 Accident — Severity Medium
+      <div class="card">
+        <h2>Report Emergency</h2>
+
+        <label for="type">Incident Type</label>
+        <select id="type">
+  <option value="Fire">Fire</option>
+  <option value="Road Accident">Road Accident</option>
+  <option value="Medical Emergency">Medical Emergency</option>
+  <option value="Heart Attack">Heart Attack</option>
+  <option value="Flood">Flood</option>
+  <option value="Earthquake">Earthquake</option>
+  <option value="Gas Leak">Gas Leak</option>
+  <option value="Building Collapse">Building Collapse</option>
+  <option value="Power Outage">Power Outage</option>
+  <option value="Security Threat">Security Threat</option>
+  <option value="Chemical Spill">Chemical Spill</option>
+  <option value="Rescue Required">Rescue Required</option>
+</select>
+
+        <label for="severity">Severity</label>
+        <select id="severity">
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+
+        <button id="reportBtn">Report Emergency</button>
+
+<button id="sosBtn" class="sos-btn">
+🚨 SOS EMERGENCY
+</button>
+
+      <div class="stats-grid">
+        <div class="mini-card">
+          <span>Total Incidents</span>
+          <strong id="totalIncidents">0</strong>
+        </div>
+        <div class="mini-card">
+          <span>High Severity</span>
+          <strong id="highCount">0</strong>
+        </div>
+        <div class="mini-card">
+          <span>Active Responders</span>
+          <strong>4</strong>
+        </div>
       </div>
 
-      <div class="incident low">
-        ❤️ Medical — Severity Low
+      <div class="card">
+        <div class="panel-head">
+          <h2>Active Emergencies</h2>
+          <span id="incidentCount" class="count-badge">0</span>
+        </div>
+        <div id="incidentList" class="incident-list"></div>
       </div>
+    </section>
 
-    </div>
+    <section class="right-panel">
+      <div class="map-card">
+        <div class="panel-head">
+          <h2>Live Emergency Map</h2>
+          <span class="map-badge">OpenStreetMap</span>
+        </div>
+        <div id="map"></div>
+      </div>
+    </section>
+  </main>
 
-  </div>
-
-  <div class="map-area">
-
-    <div class="map-header">
-      <h2>Live Emergency Map</h2>
-    </div>
-
-    <div id="map"></div>
-
-  </div>
-
-</div>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="map.js"></script>
-
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="map.js"></script>
 </body>
 </html>
