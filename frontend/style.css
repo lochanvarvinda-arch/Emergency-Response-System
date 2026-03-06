@@ -1,0 +1,26 @@
+body{
+font-family: Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+#map{
+height:500px;
+width:90%;
+margin:auto;
+border:2px solid black;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+margin:10px;
+cursor:pointer;
+background:red;
+color:white;
+border:none;
+}
+
+ul{
+list-style:none;
+}
