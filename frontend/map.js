@@ -1,32 +1,61 @@
+// Initialize map
 var map = L.map('map').setView([13.0827,80.2707],13);
 
+// Load OpenStreetMap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-attribution:'© OpenStreetMap'
+ attribution:'© OpenStreetMap contributors'
 }).addTo(map);
 
-var incidentCount = 0;
 
+// Example starting emergency
+L.marker([13.0827,80.2707])
+.addTo(map)
+.bindPopup("🚗 Accident<br>Severity: High");
+
+
+// Function called when button is pressed
 function reportEmergency(){
 
-incidentCount++;
+let type = document.getElementById("type").value;
+let severity = document.getElementById("severity").value;
 
-var lat = 13.0827 + (Math.random()-0.5)*0.02;
-var lng = 80.2707 + (Math.random()-0.5)*0.02;
 
-var severityLevels = ["Low","Medium","High"];
-var severity = severityLevels[Math.floor(Math.random()*3)];
+// For demo we generate a random nearby location
+let lat = 13.0827 + (Math.random() * 0.02 - 0.01);
+let lng = 80.2707 + (Math.random() * 0.02 - 0.01);
 
+
+// Data sent to backend
+let emergencyData={
+type:type,
+lat:lat,
+lng:lng,
+severity:severity
+};
+
+
+// Send to your friend's backend
+fetch("http://localhost:3000/report",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(emergencyData)
+})
+.then(res=>res.json())
+.then(data=>{
+
+console.log("Stored in backend:",data);
+
+// Add marker to map
 L.marker([lat,lng])
 .addTo(map)
-.bindPopup("Incident "+incidentCount+"<br>Severity: "+severity)
+.bindPopup("🚨 "+type+"<br>Severity: "+severity)
 .openPopup();
 
-var list = document.getElementById("incidentList");
-
-var item = document.createElement("li");
-
-item.innerHTML = "Incident "+incidentCount+" | Severity: "+severity;
-
-list.appendChild(item);
+})
+.catch(err=>{
+console.error("Backend error:",err);
+});
 
 }

@@ -2,30 +2,78 @@
 <html>
 
 <head>
+  <title>Smart Emergency Response AI</title>
 
-<title>Emergency Response Coordination System</title>
+  <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 
 <body>
 
-<h1>Emergency Response Dashboard</h1>
+<header>
+  <h1>🚑 Smart Emergency Response AI</h1>
+  <p>AI-powered emergency prioritization & response coordination</p>
+</header>
 
-<button onclick="reportEmergency()">Report Emergency</button>
+<div class="dashboard">
 
-<div id="map"></div>
+  <div class="sidebar">
 
-<h2>Incident List</h2>
+    <div class="card">
+      <h2>Report Emergency</h2>
 
-<ul id="incidentList"></ul>
+      <label>Type</label>
+      <select id="type">
+        <option value="Fire">Fire</option>
+        <option value="Accident">Accident</option>
+        <option value="Medical">Medical</option>
+      </select>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <label>Severity</label>
+      <select id="severity">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+
+      <button onclick="reportEmergency()">🚨 Report Emergency</button>
+
+    </div>
+
+    <div class="card">
+      <h2>Active Emergencies</h2>
+
+      <div class="incident high">
+        🔥 Fire — Severity High
+      </div>
+
+      <div class="incident medium">
+        🚗 Accident — Severity Medium
+      </div>
+
+      <div class="incident low">
+        ❤️ Medical — Severity Low
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="map-area">
+
+    <div class="map-header">
+      <h2>Live Emergency Map</h2>
+    </div>
+
+    <div id="map"></div>
+
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="map.js"></script>
 
 </body>
-
 </html>
